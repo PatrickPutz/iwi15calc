@@ -3,6 +3,7 @@ package at.edu.c02.calculator.logic;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import at.edu.c02.calculator.Calculator;
@@ -25,7 +26,7 @@ public class CalculatorTest {
 
 		//verify
 		assertEquals(5, result, 0);
-		
+
 
 	}
 	
@@ -53,8 +54,29 @@ public class CalculatorTest {
 
 	}
 	
-	
-	
+	@Test
+	public void testSimpleModOperation() throws Exception {
+
+		Calculator calc = new CalculatorImpl();
+		calc.push(6.0);
+		calc.push(2.0);
+		double result = calc.perform(Operation.mod);
+
+		assertEquals(0, result, 0);
+
+	}
+
+	@Test
+	public void testAnotherSimpleModOperation() throws Exception {
+
+		Calculator calc = new CalculatorImpl();
+		calc.push(15.0);
+		calc.push(-12);
+		double result = calc.perform(Operation.mod);
+
+		assertEquals(3, result, 0);
+
+	}
 	
 
 	//
@@ -82,6 +104,23 @@ public class CalculatorTest {
 		} catch (CalculatorException e) {
 			assertEquals("Division by zero", e.getMessage());
 			// e.getCause()
+		}
+
+	}
+
+	@Test
+	public void testModuloByZero() throws Exception {
+
+		Calculator calc = new CalculatorImpl();
+		try {
+			calc.push(2);
+			calc.push(0);
+			calc.perform(Operation.mod);
+
+			fail("Exception expected");
+
+		} catch (CalculatorException e) {
+			assertEquals("Division by zero", e.getMessage());
 		}
 
 	}
