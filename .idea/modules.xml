@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/iwi15calc.iml" filepath="$PROJECT_DIR$/.idea/iwi15calc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/stackCalculator/stackCalculator.iml" filepath="$PROJECT_DIR$/stackCalculator/stackCalculator.iml" />
     </modules>
   </component>
 </project>
