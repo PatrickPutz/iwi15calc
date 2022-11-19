@@ -13,7 +13,10 @@ public class CalculatorImpl implements Calculator {
 	@Override
 	public double perform(Operation op) throws CalculatorException {
 
-		double b = pop();
+		double b = 0.0;
+		if(op == Operation.add || op == Operation.sub || op == Operation.div || op == Operation.mul || op == Operation.mod)
+			b = pop();
+
 		double a = pop();
 
 		switch (op) {
@@ -33,7 +36,8 @@ public class CalculatorImpl implements Calculator {
 				throw new CalculatorException("Division by zero");
 			return a % b;
 		case sin:
-			return 0;
+			double rad = Math.toRadians(a);
+			return Math.sin(rad);
 		case cos:
 			return 0;
 		}
