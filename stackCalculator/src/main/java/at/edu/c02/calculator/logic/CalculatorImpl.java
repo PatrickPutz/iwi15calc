@@ -36,10 +36,9 @@ public class CalculatorImpl implements Calculator {
 				throw new CalculatorException("Division by zero");
 			return a % b;
 		case sin:
-			double rad = Math.toRadians(a);
-			return Math.sin(rad);
+			return Math.sin(Math.toRadians(a));
 		case cos:
-			return 0;
+			return Math.cos(Math.toRadians(a));
 		}
 		return 0;
 	}
