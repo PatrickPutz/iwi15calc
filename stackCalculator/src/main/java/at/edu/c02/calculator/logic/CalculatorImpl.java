@@ -32,6 +32,10 @@ public class CalculatorImpl implements Calculator {
 			if (b == 0)
 				throw new CalculatorException("Division by zero");
 			return a % b;
+		case sin:
+			return 0;
+		case cos:
+			return 0;
 		}
 		return 0;
 	}
