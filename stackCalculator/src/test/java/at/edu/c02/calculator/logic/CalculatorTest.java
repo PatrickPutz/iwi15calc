@@ -142,4 +142,53 @@ public class CalculatorTest {
 
 		assertEquals(-1, result, 0);
 	}
+
+	@Test
+	public void testSimpleDotProductOperation() throws Exception{
+		Calculator calc = new CalculatorImpl();
+		calc.push(1);
+		calc.push(3);
+		calc.push(2);
+		calc.push(4);
+		calc.push(2);
+		double result = calc.perform(Operation.dotproduct);
+
+		assertEquals(14, result, 0);
+	}
+
+	@Test
+	public void testAnotherDotProductOperation() throws Exception{
+		Calculator calc = new CalculatorImpl();
+		calc.push(1);
+		calc.push(3);
+		calc.push(147);
+
+		calc.push(2);
+		calc.push(4);
+		calc.push(558);
+
+		calc.push(3);
+		double result = calc.perform(Operation.dotproduct);
+
+		assertEquals(82040, result, 0);
+	}
+
+	@Test
+	public void testUnevenStackSize() throws Exception {
+
+		Calculator calc = new CalculatorImpl();
+		try {
+			calc.push(3);
+			calc.push(2);
+			calc.push(4);
+			calc.push(2);
+			double result = calc.perform(Operation.dotproduct);
+
+			fail("Exception expected");
+
+		} catch (CalculatorException e) {
+			assertEquals("Uneven Stack Size!", e.getMessage());
+		}
+
+	}
 }
