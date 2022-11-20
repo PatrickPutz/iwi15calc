@@ -18,7 +18,7 @@ public class CalculatorImpl implements Calculator {
 
 		// Exclude b in case of sinus/cosinus
 		// Don't pop values in case of dotproduct
-		if(op == Operation.add || op == Operation.sub || op == Operation.div || op == Operation.mul || op == Operation.mod)
+		if(op != Operation.sin && op != Operation.cos && op != Operation.dotproduct)
 			b = pop();
 		if(op != Operation.dotproduct)
 			a = pop();
@@ -71,25 +71,33 @@ public class CalculatorImpl implements Calculator {
 		int elementsPerVector = (int) lastStackItem;
 
 		if(stack_.size() != elementsPerVector * 2)
-			throw new CalculatorException("Uneven Stack Size!");
+			throw new CalculatorException("Incorrect Stack Size!");
 
-		double[] vectorA = new double[(int) elementsPerVector];
-		double[] vectorB = new double[(int) elementsPerVector];
+		double[] vectorB = populateVector(elementsPerVector);
+		double[] vectorA = populateVector(elementsPerVector);
+
+		return calculateDotProduct(vectorA, vectorB, elementsPerVector);
+	}
+
+	private double[] populateVector(int elementsPerVector){
+		double[] result = new double[elementsPerVector];
 
 		for(int i = 1; i <= elementsPerVector; i++){
 			double value = stack_.pop();
-			vectorB[elementsPerVector - i] = value;
-		}
-		for(int i = 1; i <= elementsPerVector; i++){
-			double value = stack_.pop();
-			vectorA[elementsPerVector - i] = value;
+			result[elementsPerVector - i] = value;
 		}
 
+		return result;
+	}
+
+	private double calculateDotProduct(double[] vectorA, double[] vectorB, int elementsPerVector){
 		double result = 0.0;
+
 		for(int i = 0; i < elementsPerVector; i++){
 			double multiplicationResult = vectorA[i] * vectorB[i];
 			result += multiplicationResult;
 		}
+
 		return result;
 	}
 }

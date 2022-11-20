@@ -174,7 +174,7 @@ public class CalculatorTest {
 	}
 
 	@Test
-	public void testUnevenStackSize() throws Exception {
+	public void testIncorrectStackSize() throws Exception {
 
 		Calculator calc = new CalculatorImpl();
 		try {
@@ -187,7 +187,7 @@ public class CalculatorTest {
 			fail("Exception expected");
 
 		} catch (CalculatorException e) {
-			assertEquals("Uneven Stack Size!", e.getMessage());
+			assertEquals("Incorrect Stack Size!", e.getMessage());
 		}
 
 	}
