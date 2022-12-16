@@ -3,12 +3,17 @@
 
 name: JavaCI
 
+# definiert wann gebuildet wird
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  release:
+    types:
+      - published
 
+# was passiert wenn gebuildet wird
 jobs:
   build:
 
@@ -33,3 +38,9 @@ jobs:
 
     - name: Build with Maven
       run: mvn -B package --file stackCalculator/pom.xml
+
+    - name: Create artifact
+      uses: actions/upload-artifact@v3
+      with:
+        path: stackCalculator/target/
+
