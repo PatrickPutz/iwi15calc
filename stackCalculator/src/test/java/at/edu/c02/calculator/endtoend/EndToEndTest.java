@@ -73,4 +73,14 @@ public class EndToEndTest {
 
         Assert.assertEquals(result, -1, 0);
     }
+
+    @Test
+    public void testParserCalculatorTest10Xml() throws CalculatorException, XMLStreamException, FileNotFoundException {
+        Calculator calc = new CalculatorImpl();
+        Parser parser = new Parser(calc);
+
+        double result = parser.parse(new File("src/test/resources/test10.xml"));
+
+        Assert.assertEquals(result, 15, 0);
+    }
 }
