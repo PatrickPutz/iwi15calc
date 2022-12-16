@@ -11,10 +11,13 @@ import javax.xml.stream.events.*;
 import at.edu.c02.calculator.Calculator;
 import at.edu.c02.calculator.CalculatorException;
 import at.edu.c02.calculator.Calculator.Operation;
+import at.edu.c02.calculator.StorageException;
+import at.edu.c02.calculator.store.Storage;
 
 public class Parser {
 
 	private Calculator calc_;
+	private Storage store;
 
 	public Parser(Calculator cal) {
 		if (cal == null)
@@ -23,7 +26,7 @@ public class Parser {
 	}
 
 	public double parse(File calculation) throws FileNotFoundException,
-			XMLStreamException, CalculatorException {
+			XMLStreamException, CalculatorException, StorageException {
 
 		double result = 0;
 		XMLEventReader r = createXmlEventReader(calculation);
@@ -47,10 +50,18 @@ public class Parser {
 				result = calc_.perform(readOperation(value));
 			} else if ("store".equals(e.asStartElement().getName()
 					.getLocalPart())){
-				calc_.store(result);
+				if("store value=".equals(e.asStartElement().getName()
+						.getLocalPart()))
+					store.store(value, result);
+				else
+					calc_.store(result);
 			} else if("load".equals(e.asStartElement().getName()
 					.getLocalPart())){
-				calc_.push(calc_.load());
+				if("load value=".equals(e.asStartElement().getName()
+						.getLocalPart()))
+					store.load(value);
+				else
+					calc_.push(calc_.load());
 			}
 		}
 
