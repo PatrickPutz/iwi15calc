@@ -9,6 +9,7 @@ import at.edu.c02.calculator.CalculatorException;
 public class CalculatorImpl implements Calculator {
 
 	private Stack<Double> stack_ = new Stack<Double>();
+	private double stored;
 
 	@Override
 	public double perform(Operation op) throws CalculatorException {
@@ -65,6 +66,17 @@ public class CalculatorImpl implements Calculator {
 	public void clear() {
 		stack_.clear();
 	}
+
+	@Override
+	public void store(double value){
+		this.stored = value;
+	}
+
+	@Override
+	public double load(){
+		return this.stored;
+	}
+
 
 	public double dotProduct() throws CalculatorException {
 		double lastStackItem = stack_.pop();
