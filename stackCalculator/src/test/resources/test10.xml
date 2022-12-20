@@ -3,7 +3,7 @@
 	<push value="2" />
 	<push value="3" />
 	<operation value="+" />
-	<store value="Result" />
+	<store/>
 	<push value="Result" />
 	<push value="4" />
 	<operation value="+" />
@@ -13,7 +13,7 @@
 	<push value="Result"/>
 	<push value="3" />
 	<operation value="/" />
-	<store value="Result" />
+	<store/>
 	<push value="2" />
 	<push value="Result"/>
 	<operation value="*" />

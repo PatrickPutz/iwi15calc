@@ -25,6 +25,15 @@ public class Parser {
 		calc_ = cal;
 	}
 
+	public Parser(Calculator cal, Storage store){
+		if (cal == null)
+			throw new IllegalArgumentException("Calculator not set");
+		calc_ = cal;
+		if(store == null)
+			throw new IllegalArgumentException("Storage not set");
+		this.store = store;
+	}
+
 	public double parse(File calculation) throws FileNotFoundException,
 			XMLStreamException, CalculatorException, StorageException {
 
@@ -50,16 +59,14 @@ public class Parser {
 				result = calc_.perform(readOperation(value));
 			} else if ("store".equals(e.asStartElement().getName()
 					.getLocalPart())){
-				if("store value=".equals(e.asStartElement().getName()
-						.getLocalPart()))
-					store.store(value, result);
+				if(attribute != null)
+					this.store.store(value, result);
 				else
 					calc_.store(result);
 			} else if("load".equals(e.asStartElement().getName()
 					.getLocalPart())){
-				if("load value=".equals(e.asStartElement().getName()
-						.getLocalPart()))
-					store.load(value);
+				if(attribute != null)
+					calc_.push(this.store.load(value));
 				else
 					calc_.push(calc_.load());
 			}
