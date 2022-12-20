@@ -2,8 +2,10 @@ package at.edu.c02.calculator.endtoend;
 
 import at.edu.c02.calculator.Calculator;
 import at.edu.c02.calculator.CalculatorException;
+import at.edu.c02.calculator.StorageException;
 import at.edu.c02.calculator.logic.CalculatorImpl;
 import at.edu.c02.calculator.parser.Parser;
+import at.edu.c02.calculator.store.Storage;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,7 +17,7 @@ import java.io.FileNotFoundException;
 public class EndToEndTest {
 
     @Test
-    public void testParserCalculatorTest04Xml() throws CalculatorException, XMLStreamException, FileNotFoundException {
+    public void testParserCalculatorTest04Xml() throws CalculatorException, XMLStreamException, FileNotFoundException, StorageException {
         Calculator calc = new CalculatorImpl();
         Parser parser = new Parser(calc);
 
@@ -25,7 +27,7 @@ public class EndToEndTest {
     }
 
     @Test
-    public void testParserCalculatorTest05Xml() throws CalculatorException, XMLStreamException, FileNotFoundException {
+    public void testParserCalculatorTest05Xml() throws CalculatorException, XMLStreamException, FileNotFoundException, StorageException {
         Calculator calc = new CalculatorImpl();
         Parser parser = new Parser(calc);
 
@@ -35,7 +37,7 @@ public class EndToEndTest {
     }
 
     @Test
-    public void testParserCalculatorTest06Xml() throws CalculatorException, XMLStreamException, FileNotFoundException {
+    public void testParserCalculatorTest06Xml() throws CalculatorException, XMLStreamException, FileNotFoundException, StorageException {
         Calculator calc = new CalculatorImpl();
         Parser parser = new Parser(calc);
 
@@ -45,7 +47,7 @@ public class EndToEndTest {
     }
 
     @Test
-    public void testParserCalculatorTest07Xml() throws CalculatorException, XMLStreamException, FileNotFoundException {
+    public void testParserCalculatorTest07Xml() throws CalculatorException, XMLStreamException, FileNotFoundException, StorageException {
         Calculator calc = new CalculatorImpl();
         Parser parser = new Parser(calc);
 
@@ -55,7 +57,7 @@ public class EndToEndTest {
     }
 
     @Test
-    public void testParserCalculatorTest08Xml() throws CalculatorException, XMLStreamException, FileNotFoundException {
+    public void testParserCalculatorTest08Xml() throws CalculatorException, XMLStreamException, FileNotFoundException, StorageException {
         Calculator calc = new CalculatorImpl();
         Parser parser = new Parser(calc);
 
@@ -65,7 +67,7 @@ public class EndToEndTest {
     }
 
     @Test
-    public void testParserCalculatorTest09Xml() throws CalculatorException, XMLStreamException, FileNotFoundException {
+    public void testParserCalculatorTest09Xml() throws CalculatorException, XMLStreamException, FileNotFoundException, StorageException {
         Calculator calc = new CalculatorImpl();
         Parser parser = new Parser(calc);
 
@@ -75,12 +77,23 @@ public class EndToEndTest {
     }
 
     @Test
-    public void testParserCalculatorTest10Xml() throws CalculatorException, XMLStreamException, FileNotFoundException {
+    public void testParserCalculatorTest10Xml() throws CalculatorException, XMLStreamException, FileNotFoundException, StorageException {
         Calculator calc = new CalculatorImpl();
         Parser parser = new Parser(calc);
 
         double result = parser.parse(new File("src/test/resources/test10.xml"));
 
         Assert.assertEquals(result, 15, 0);
+    }
+
+    @Test
+    public void testParserCalculatorTest11Xml() throws CalculatorException, XMLStreamException, FileNotFoundException, StorageException {
+        Calculator calc = new CalculatorImpl();
+        Storage store = new Storage();
+        Parser parser = new Parser(calc, store);
+
+        double result = parser.parse(new File("src/test/resources/test11.xml"));
+
+        Assert.assertEquals(result, 14, 0);
     }
 }
